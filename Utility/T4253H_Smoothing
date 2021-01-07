@@ -1,8 +1,9 @@
 # Environment
+import numpy
 import pandas as pd
 
 # TEMP for testing
-vector = [1, 2, 3, 4, 5, 6, 7, 7.7, 6, 8, 9]
+vector = [1, 2, 3, 4, 5, 6, 7, 7.7, 6, 8, 9, 5, 8, 12]
 
 
 def running_median(array, window):
@@ -14,7 +15,19 @@ def running_median(array, window):
 def t4253h_smoothing(array):
     s = pd.Series(array)
     i = s.rolling(4).median()
+    i.fillna(s, inplace=True)
+
+    s = i
     i = i.rolling(2).median()
+    i.fillna(s, inplace=True)
+
+    s = i
     i = i.rolling(5).median()
+    i.fillna(s, inplace=True)
+
+    s = i
     i = i.rolling(3).median()
+    i.fillna(s, inplace=True)
     return i
+
+print(t4253h_smoothing(vector))
