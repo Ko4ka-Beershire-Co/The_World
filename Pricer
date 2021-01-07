@@ -1,1 +1,26 @@
+# Environment
+import numpy as np
+import pandas as pd
 
+# TEMP for testing from .csv
+data = pd.read_csv('Data.csv')
+price = data.Price
+
+
+def pricing(price_array, tau):
+
+    # Tell-a-trend
+    MA_price = price_array.rolling(tau).sum()
+    MA_price.fillna(price_array, inplace=True)
+
+    if (price_array.at[len(price_array) - 1]) - (MA_price.at[len(MA_price) - 1]) > np.std(price_array):
+        print('Trend:')
+        if (price_array.at[len(price_array) - 1]) - (MA_price.at[len(MA_price) - 1]) > 0:
+            print('Up')
+        if (price_array.at[len(price_array) - 1]) - (MA_price.at[len(MA_price) - 1]) < 0:
+            print('down')
+    if (price_array.at[len(price_array) - 1]) - (MA_price.at[len(MA_price) - 1]) < np.std(price_array):
+        print('flat')
+
+
+pricing(price, 3)
