@@ -1,18 +1,17 @@
-# T4253H - robust smoothing algorithm (IBM)
-
 # Environment
 
 import numpy as np
 import scipy as sp
 import scipy.ndimage
 
-#TEMP for testing
+# TEMP for testing
 vector = [1, 2, 3, 4, 5, 6, 7, 7.7, 6, 8, 9]
 
 
 # T4253H
-def T4253H_smoothing(array, mode='reflect'):
-    return sp.ndimage.median_filter(array, len(array), mode=mode)
+def running_median(array, mode='reflect'):
+    output = sp.ndimage.median_filter(array, len(array), mode=mode)
+    return output
 
 
-print(str(T4253H_smoothing(vector)))
+print(running_median(vector))
