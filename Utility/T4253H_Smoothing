@@ -30,4 +30,12 @@ def t4253h_smoothing(array):
     i.fillna(s, inplace=True)
     return i
 
+
+def MA(array, tau, fill = False):
+    MA_price = array.rolling(tau).sum()
+    if fill:
+        MA_price.fillna(array, inplace=True)
+    return MA_price
+    
+    
 print(t4253h_smoothing(vector))
