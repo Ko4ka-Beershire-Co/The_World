@@ -4,6 +4,7 @@ import pandas as pd
 import yfinance as yf
 from datetime import date
 
+#   How to use 101: go down, find the MAGIC BUTTON, input the ticker, enjoy!
 
 def get_data(ticker, interval, start_date="2019-1-1", end_date='today'):
     # Today handling (obvious IMHO)
@@ -22,7 +23,7 @@ def pricing(price_array, tau):
     # Tell-a-trend
     MA_price = price_array.rolling(tau).mean()   # Rolling mean of tau window
     MA_price.fillna(price_array, inplace=True)   # Rolling mean(right) removes some data, so we replace it
-    
+
     # algorithm for pricing (readme.md for more info)
     if (price_array[len(price_array) - 1]) - (MA_price[len(MA_price) - 1]) > np.std(price_array):
         Trend = True
@@ -59,6 +60,7 @@ def runner(ticker, mult_long=0.333, mult_med=0.333, mult_short=0.333, start_date
     # Final weights
     end_price = mult_long * int(price_long) + mult_med * int(price_med) + mult_short * int(price_short)
     # Test
+    print('The estimated fair price is:')
 
     return end_price
 
