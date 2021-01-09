@@ -32,7 +32,7 @@ def t4253h_smoothing(array):
 
 
 def MA(array, tau, fill = False):
-    MA_price = array.rolling(tau).sum()
+    MA_price = array.rolling(tau).mean()
     if fill:
         MA_price.fillna(array, inplace=True)
     return MA_price
